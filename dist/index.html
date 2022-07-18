@@ -14,45 +14,59 @@
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
   </head>
 
-  <body>
+  <body x-data="{menuOpen: false}" x-bind:class="menuOpen ? 'menuOpen' : ''">
     <div id="container">
-      <header id="header">
+      <header id="header" class="top-0">
         <section class="container">
-          <div class="flex flex-col flex-wrap items-center justify-between py-6 md:flex-row border-b border-body-light/20">
+          <div class="flex items-center justify-between border-b py-6 border-body-light/20 transition-all">
             <a href="#_" class="flex items-center space-x-2">
               <span class="text-3xl font-black bg-clip-text text-transparent bg-gradient-to-br from-body-light/20 to-body">SGD</span>
               <span class="text-body">implants</span>
               <span class="font-black text-green-600">.</span>
             </a>
 
-            <nav class="flex text-sm justify-center flex-wrap items-center border-b border-gray-200 py-3 md:border-b-0 md:py-0">
-              <a href="#" class="p-2 text-body underline hover:text-body hover:underline transition">О компании</a>
-              <a href="#" class="p-2 hover:text-body hover:underline transition">Продукция</a>
-              <a href="#" class="p-2 hover:text-body hover:underline transition">Сотрудники</a>
-              <a href="#" class="p-2 hover:text-body hover:underline transition">Сертификаты</a>
-              <a href="#" class="p-2 hover:text-body hover:underline transition">Контакты</a>
+            <nav class="header__nav" x-bind:class="menuOpen ? '!translate-x-0 !opacity-100' : ''">
+              <ul x-data="{menuTab: ''}" class="header__ul">
+                <li><a x-bind:class="{'is_active': menuTab === 'who-we-are'}" x-on:click="menuTab = 'who-we-are'; menuOpen = false;" href="#who-we-are">О компании</a></li>
+                <li><a x-bind:class="{'is_active': menuTab === 'production'}" x-on:click="menuTab = 'production'; menuOpen = false" href="#production">Продукция</a></lis=>
+                <li><a x-bind:class="{'is_active': menuTab === 'staff'}" x-on:click="menuTab = 'staff'; menuOpen = false" href="#staff">Сотрудники</a></li>
+                <li><a x-bind:class="{'is_active': menuTab === 'certificates'}" x-on:click="menuTab = 'certificates'; menuOpen = false" href="#certificates">Сертификаты</a></li=>
+                <li><a x-bind:class="{'is_active': menuTab === 'contacts'}" x-on:click="menuTab = 'contacts'; menuOpen = false" href="#contacts">Контакты</a></li>
+              </ul>
+
+              <button x-on:click="menuOpen = false" class="absolute top-7 right-4 z-20 opacity-0 delay-1000 transition md:hidden" x-bind:class="menuOpen ? 'opacity-100' : ''">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
             </nav>
+
+            <button x-on:click="menuOpen = true" class="md:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
         </section>
       </header>
 
       <main id="main">
         <section class="container my-24">
-          <div class="flex gap-24 items-center">
-            <div class="w-6/12 space-y-5">
-              <h1 class="text-5xl font-extrabold text-body">Спинальные системы</h1>
+          <div class="flex gap-24 md-down:gap-12 md-down:flex-col-reverse items-center md-down:text-center">
+            <div class="w-full md:w-6/12 space-y-5">
+              <h1 class="text-4xl md:text-5xl font-extrabold text-body">Спинальные системы</h1>
               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae consequuntur, doloribus excepturi laudantium quos sed quibusdam nihil ad unde ipsa?</p>
 
 
               <a href="#_" class="inline-flex !mt-10 px-6 py-3 bg-body-light/20 rounded">Посмотреть</a>
             </div>
 
-            <div class="relative rounded-lg cursor-pointer w-6/12">
+            <div class="relative rounded-lg cursor-pointer w-full md:w-6/12">
               <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-11/12">
                 <svg class="w-full h-full object-cover text-gray-100 drop-shadow-xl/50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45,-78C58.3,-70.3,69,-58.2,75.2,-44.4C81.3,-30.7,82.9,-15.3,83.5,0.4C84.2,16,83.8,32.1,76.5,43.9C69.2,55.7,55.1,63.3,41.2,69.4C27.3,75.4,13.6,80,-0.7,81.2C-15.1,82.5,-30.1,80.3,-41.2,72.6C-52.2,64.9,-59.2,51.6,-67.1,38.5C-75.1,25.5,-83.9,12.8,-83.8,0C-83.8,-12.7,-74.9,-25.4,-65.8,-36.4C-56.7,-47.4,-47.4,-56.7,-36.4,-65.7C-25.4,-74.7,-12.7,-83.5,1.6,-86.2C15.9,-89,31.8,-85.7,45,-78Z" transform="translate(100 100)"></path></svg>
               </div>
 
-              <img src="img/surgery.jpg" class="relative rounded-lg object-cover w-full h-full shadow-2xl" alt="Спинальные системы">
+              <img src="img/surgery.jpg" class="relative rounded-lg object-cover w-full h-full drop-shadow-2xl" alt="Спинальные системы">
             </div>
           </div>
 
@@ -65,25 +79,15 @@
           </ul>
         </section>
 
-        <hr class="my-24 border-t hidden">
-
-        <section class="container my-24 space-y-10 hidden">
-          <div class="space-y-5 max-w-prose mx-auto text-center">
-            <h1 class="text-5xl font-extrabold text-body">Направления работы компании</h1>
-
-            <p>Основные направления работы компании – разработка и производство наукоемких технологий и имплантируемых изделий медицинского назначения.</p>
-          </div>
-        </section>
-
-        <section class="py-24 bg-body-light/5">
+        <section id="who-we-are" class="py-12 md:py-24 bg-body-light/5 scroll-margin">
           <div class="container space-y-10">
             <div class="max-w-prose space-y-5">
-              <h1 class="text-5xl font-extrabold text-body">Кто мы? Почему нам доверяют?</h1>
+              <h1 class="text-4xl md:text-5xl font-extrabold text-body">Кто мы? Почему нам доверяют?</h1>
 
               <p>Чем мы заслужили доверие наших клиентов, почему с нами работать можно.</p>
             </div>
 
-            <div class="grid grid-cols-4 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
               <div class="bg-white p-8 pb-16 rounded space-y-4 shadow-2xl shadow-body-light/20">
                 <svg xmlns="http://www.w3.org/2000/svg" class="text-body h-6 w-6 !mb-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
@@ -125,23 +129,23 @@
               </div>
             </div>
 
-            <p class="flex items-center justify-center space-x-5 !mt-24">
+            <p class="flex items-center justify-center space-x-5 md:!mt-24">
               <a href="#_" class="inline-flex px-6 py-3 bg-body-light/20 rounded">Довертесь нам</a>
               <a href="#_" class="inline-flex px-6 py-3 border border-body-light/20 rounded">Прочитать отзывы</a>
             </p>
           </div>
         </section>
 
-        <section class="container my-24 space-y-10">
+        <section id="production" class="container py-24 space-y-10 scroll-margin">
           <div class="space-y-5 max-w-prose mx-auto text-center">
-            <h1 class="text-5xl font-extrabold text-body">Наша продукция</h1>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-body">Наша продукция</h1>
 
             <p>Основные направления работы компании – разработка и производство наукоемких технологий и имплантируемых изделий медицинского назначения.</p>
           </div>
 
-          <div class="space-y-5">
-            <div class="flex items-center">
-              <div class="relative rounded-lg cursor-pointer w-6/12 text-center p-24">
+          <div class="products-list space-y-10 md:space-y-5">
+            <div class="flex">
+              <div class="relative rounded-lg cursor-pointer w-full md:w-6/12 text-center p-0 md:p-24">
                 <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-11/12">
                   <svg class="w-full h-full object-cover text-gray-100 drop-shadow-xl/50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45,-78C58.3,-70.3,69,-58.2,75.2,-44.4C81.3,-30.7,82.9,-15.3,83.5,0.4C84.2,16,83.8,32.1,76.5,43.9C69.2,55.7,55.1,63.3,41.2,69.4C27.3,75.4,13.6,80,-0.7,81.2C-15.1,82.5,-30.1,80.3,-41.2,72.6C-52.2,64.9,-59.2,51.6,-67.1,38.5C-75.1,25.5,-83.9,12.8,-83.8,0C-83.8,-12.7,-74.9,-25.4,-65.8,-36.4C-56.7,-47.4,-47.4,-56.7,-36.4,-65.7C-25.4,-74.7,-12.7,-83.5,1.6,-86.2C15.9,-89,31.8,-85.7,45,-78Z" transform="translate(100 100)"></path></svg>
                 </div>
@@ -149,8 +153,8 @@
                 <img src="img/key.png" class="relative rounded-lg object-cover w-full h-full drop-shadow-2xl" alt="Спинальные системы">
               </div>
 
-              <div class="w-6/12 space-y-5 px-12">
-                <h2 class="text-4xl font-extrabold text-body">Спинальные системы</h2>
+              <div class="w-full md:w-6/12 space-y-5 md:px-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-body">Спинальные системы</h2>
 
                 <p>Имплантируемые конструкции применяются при заболеваниях и повреждениях позвоночника.</p>
 
@@ -158,17 +162,17 @@
               </div>
             </div>
 
-            <div class="flex flex-row-reverse items-center">
-              <div class="relative rounded-lg cursor-pointer w-6/12 text-center p-24">
+            <div class="flex">
+              <div class="relative rounded-lg cursor-pointer w-full md:w-6/12 text-center p-0 md:p-24">
                 <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-11/12">
                   <svg class="w-full h-full object-cover text-gray-100 drop-shadow-xl/50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45,-78C58.3,-70.3,69,-58.2,75.2,-44.4C81.3,-30.7,82.9,-15.3,83.5,0.4C84.2,16,83.8,32.1,76.5,43.9C69.2,55.7,55.1,63.3,41.2,69.4C27.3,75.4,13.6,80,-0.7,81.2C-15.1,82.5,-30.1,80.3,-41.2,72.6C-52.2,64.9,-59.2,51.6,-67.1,38.5C-75.1,25.5,-83.9,12.8,-83.8,0C-83.8,-12.7,-74.9,-25.4,-65.8,-36.4C-56.7,-47.4,-47.4,-56.7,-36.4,-65.7C-25.4,-74.7,-12.7,-83.5,1.6,-86.2C15.9,-89,31.8,-85.7,45,-78Z" transform="translate(100 100)"></path></svg>
                 </div>
 
-                <img src="img/osteosintez.jpg" class="relative rounded-lg object-cover w-full h-full shadow-2xl" alt="Остеосинтез">
+                <img src="img/osteosintez.jpg" class="relative rounded-lg object-cover w-full h-full drop-shadow-2xl" alt="Остеосинтез">
               </div>
 
-              <div class="w-6/12 space-y-5 px-12">
-                <h2 class="text-4xl font-extrabold text-body">Остеосинтез</h2>
+              <div class="w-full md:w-6/12 space-y-5 md:px-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-body">Остеосинтез</h2>
 
                 <p>Фиксирующие конструкции для хирургической репозиции костных отломков.</p>
 
@@ -176,17 +180,17 @@
               </div>
             </div>
 
-            <div class="flex items-center">
-              <div class="relative rounded-lg cursor-pointer w-6/12 text-center p-24">
+            <div class="flex">
+              <div class="relative rounded-lg cursor-pointer w-full md:w-6/12 text-center p-0 md:p-24">
                 <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-11/12">
                   <svg class="w-full h-full object-cover text-gray-100 drop-shadow-xl/50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45,-78C58.3,-70.3,69,-58.2,75.2,-44.4C81.3,-30.7,82.9,-15.3,83.5,0.4C84.2,16,83.8,32.1,76.5,43.9C69.2,55.7,55.1,63.3,41.2,69.4C27.3,75.4,13.6,80,-0.7,81.2C-15.1,82.5,-30.1,80.3,-41.2,72.6C-52.2,64.9,-59.2,51.6,-67.1,38.5C-75.1,25.5,-83.9,12.8,-83.8,0C-83.8,-12.7,-74.9,-25.4,-65.8,-36.4C-56.7,-47.4,-47.4,-56.7,-36.4,-65.7C-25.4,-74.7,-12.7,-83.5,1.6,-86.2C15.9,-89,31.8,-85.7,45,-78Z" transform="translate(100 100)"></path></svg>
                 </div>
 
-                <img src="img/children.jpg" class="relative rounded-lg object-cover w-full h-full shadow-2xl" alt="Детские системы">
+                <img src="img/children.jpg" class="relative rounded-lg object-cover w-full h-full drop-shadow-2xl" alt="Детские системы">
               </div>
 
-              <div class="w-6/12 space-y-5 px-12">
-                <h2 class="text-4xl font-extrabold text-body">Детские системы</h2>
+              <div class="w-full md:w-6/12 space-y-5 md:px-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-body">Детские системы</h2>
 
                 <p>Современные конструкции применяются у детей при нарушениях опорно-двигательного аппарата.</p>
 
@@ -194,17 +198,17 @@
               </div>
             </div>
 
-            <div class="flex flex-row-reverse items-center">
-              <div class="relative rounded-lg cursor-pointer w-6/12 text-center p-24">
+            <div class="flex">
+              <div class="relative rounded-lg cursor-pointer w-full md:w-6/12 text-center p-0 md:p-24">
                 <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-11/12">
                   <svg class="w-full h-full object-cover text-gray-100 drop-shadow-xl/50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45,-78C58.3,-70.3,69,-58.2,75.2,-44.4C81.3,-30.7,82.9,-15.3,83.5,0.4C84.2,16,83.8,32.1,76.5,43.9C69.2,55.7,55.1,63.3,41.2,69.4C27.3,75.4,13.6,80,-0.7,81.2C-15.1,82.5,-30.1,80.3,-41.2,72.6C-52.2,64.9,-59.2,51.6,-67.1,38.5C-75.1,25.5,-83.9,12.8,-83.8,0C-83.8,-12.7,-74.9,-25.4,-65.8,-36.4C-56.7,-47.4,-47.4,-56.7,-36.4,-65.7C-25.4,-74.7,-12.7,-83.5,1.6,-86.2C15.9,-89,31.8,-85.7,45,-78Z" transform="translate(100 100)"></path></svg>
                 </div>
 
-                <img src="img/head.jpg" class="relative rounded-lg object-cover w-full h-full shadow-2xl" alt="Краниопластика">
+                <img src="img/head.jpg" class="relative rounded-lg object-cover w-full h-full drop-shadow-2xl" alt="Краниопластика">
               </div>
 
-              <div class="w-6/12 space-y-5 px-12">
-                <h2 class="text-4xl font-extrabold text-body">Краниопластика</h2>
+              <div class="w-full md:w-6/12 space-y-5 md:px-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-body">Краниопластика</h2>
 
                 <p>Предназначены для восстановление целостности черепа после декомпрессивных повреждений.</p>
 
@@ -212,17 +216,17 @@
               </div>
             </div>
 
-            <div class="flex items-center">
-              <div class="relative rounded-lg cursor-pointer w-6/12 text-center p-24">
+            <div class="flex">
+              <div class="relative rounded-lg cursor-pointer w-full md:w-6/12 text-center p-0 md:p-24">
                 <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-11/12">
                   <svg class="w-full h-full object-cover text-gray-100 drop-shadow-xl/50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45,-78C58.3,-70.3,69,-58.2,75.2,-44.4C81.3,-30.7,82.9,-15.3,83.5,0.4C84.2,16,83.8,32.1,76.5,43.9C69.2,55.7,55.1,63.3,41.2,69.4C27.3,75.4,13.6,80,-0.7,81.2C-15.1,82.5,-30.1,80.3,-41.2,72.6C-52.2,64.9,-59.2,51.6,-67.1,38.5C-75.1,25.5,-83.9,12.8,-83.8,0C-83.8,-12.7,-74.9,-25.4,-65.8,-36.4C-56.7,-47.4,-47.4,-56.7,-36.4,-65.7C-25.4,-74.7,-12.7,-83.5,1.6,-86.2C15.9,-89,31.8,-85.7,45,-78Z" transform="translate(100 100)"></path></svg>
                 </div>
 
-                <img src="img/face.jpg" class="relative rounded-lg object-cover w-full h-full shadow-2xl" alt="Челюстно-лицевые системы">
+                <img src="img/face.jpg" class="relative rounded-lg object-cover w-full h-full drop-shadow-2xl" alt="Челюстно-лицевые системы">
               </div>
 
-              <div class="w-6/12 space-y-5 px-12">
-                <h2 class="text-4xl font-extrabold text-body">Челюстно-лицевые системы</h2>
+              <div class="w-full md:w-6/12 space-y-5 md:px-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-body">Челюстно-лицевые системы</h2>
 
                 <p>Имплантаты и системы для реконструкции, закрытия дефектов черепа и челюсти.</p>
 
@@ -230,17 +234,17 @@
               </div>
             </div>
 
-            <div class="flex flex-row-reverse items-center">
-              <div class="relative rounded-lg cursor-pointer w-6/12 text-center p-24">
+            <div class="flex">
+              <div class="relative rounded-lg cursor-pointer w-full md:w-6/12 text-center p-0 md:p-24">
                 <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-11/12">
                   <svg class="w-full h-full object-cover text-gray-100 drop-shadow-xl/50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45,-78C58.3,-70.3,69,-58.2,75.2,-44.4C81.3,-30.7,82.9,-15.3,83.5,0.4C84.2,16,83.8,32.1,76.5,43.9C69.2,55.7,55.1,63.3,41.2,69.4C27.3,75.4,13.6,80,-0.7,81.2C-15.1,82.5,-30.1,80.3,-41.2,72.6C-52.2,64.9,-59.2,51.6,-67.1,38.5C-75.1,25.5,-83.9,12.8,-83.8,0C-83.8,-12.7,-74.9,-25.4,-65.8,-36.4C-56.7,-47.4,-47.4,-56.7,-36.4,-65.7C-25.4,-74.7,-12.7,-83.5,1.6,-86.2C15.9,-89,31.8,-85.7,45,-78Z" transform="translate(100 100)"></path></svg>
                 </div>
 
-                <img src="img/oftalmology.jpg" class="relative rounded-lg object-cover w-full h-full shadow-2xl" alt="Офтальмология">
+                <img src="img/oftalmology.jpg" class="relative rounded-lg object-cover w-full h-full drop-shadow-2xl" alt="Офтальмология">
               </div>
 
-              <div class="w-6/12 space-y-5 px-12">
-                <h2 class="text-4xl font-extrabold text-body">Офтальмология</h2>
+              <div class="w-full md:w-6/12 space-y-5 md:px-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-body">Офтальмология</h2>
 
                 <p>Индивидуальные имплантаты и экзопротезы для реконструкции костных структур глазной орбиты.</p>
 
@@ -248,17 +252,17 @@
               </div>
             </div>
 
-            <div class="flex items-center">
-              <div class="relative rounded-lg cursor-pointer w-6/12 text-center p-24">
+            <div class="flex">
+              <div class="relative rounded-lg cursor-pointer w-full md:w-6/12 text-center p-0 md:p-24">
                 <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-11/12">
                   <svg class="w-full h-full object-cover text-gray-100 drop-shadow-xl/50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45,-78C58.3,-70.3,69,-58.2,75.2,-44.4C81.3,-30.7,82.9,-15.3,83.5,0.4C84.2,16,83.8,32.1,76.5,43.9C69.2,55.7,55.1,63.3,41.2,69.4C27.3,75.4,13.6,80,-0.7,81.2C-15.1,82.5,-30.1,80.3,-41.2,72.6C-52.2,64.9,-59.2,51.6,-67.1,38.5C-75.1,25.5,-83.9,12.8,-83.8,0C-83.8,-12.7,-74.9,-25.4,-65.8,-36.4C-56.7,-47.4,-47.4,-56.7,-36.4,-65.7C-25.4,-74.7,-12.7,-83.5,1.6,-86.2C15.9,-89,31.8,-85.7,45,-78Z" transform="translate(100 100)"></path></svg>
                 </div>
 
-                <img src="img/veterinary.jpg" class="relative rounded-lg object-cover w-full h-full shadow-2xl" alt="Конструкции для животных">
+                <img src="img/veterinary.jpg" class="relative rounded-lg object-cover w-full h-full drop-shadow-2xl" alt="Конструкции для животных">
               </div>
 
-              <div class="w-6/12 space-y-5 px-12">
-                <h2 class="text-4xl font-extrabold text-body">Конструкции для животных</h2>
+              <div class="w-full md:w-6/12 space-y-5 md:px-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-body">Конструкции для животных</h2>
 
                 <p>Имплантаты, используемые для лечения животных.</p>
 
@@ -266,17 +270,17 @@
               </div>
             </div>
 
-            <div class="flex flex-row-reverse items-center">
-              <div class="relative rounded-lg cursor-pointer w-6/12 text-center p-24">
+            <div class="flex">
+              <div class="relative rounded-lg cursor-pointer w-full md:w-6/12 text-center p-0 md:p-24">
                 <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-11/12">
                   <svg class="w-full h-full object-cover text-gray-100 drop-shadow-xl/50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M45,-78C58.3,-70.3,69,-58.2,75.2,-44.4C81.3,-30.7,82.9,-15.3,83.5,0.4C84.2,16,83.8,32.1,76.5,43.9C69.2,55.7,55.1,63.3,41.2,69.4C27.3,75.4,13.6,80,-0.7,81.2C-15.1,82.5,-30.1,80.3,-41.2,72.6C-52.2,64.9,-59.2,51.6,-67.1,38.5C-75.1,25.5,-83.9,12.8,-83.8,0C-83.8,-12.7,-74.9,-25.4,-65.8,-36.4C-56.7,-47.4,-47.4,-56.7,-36.4,-65.7C-25.4,-74.7,-12.7,-83.5,1.6,-86.2C15.9,-89,31.8,-85.7,45,-78Z" transform="translate(100 100)"></path></svg>
                 </div>
 
-                <img src="img/med-instuments.jpg" class="relative rounded-lg object-cover w-full h-full shadow-2xl" alt="Медицинский инструментарий">
+                <img src="img/med-instuments.jpg" class="relative rounded-lg object-cover w-full h-full drop-shadow-2xl" alt="Медицинский инструментарий">
               </div>
 
-              <div class="w-6/12 space-y-5 px-12">
-                <h2 class="text-4xl font-extrabold text-body">Медицинский инструментарий</h2>
+              <div class="w-full md:w-6/12 space-y-5 md:px-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-body">Медицинский инструментарий</h2>
 
                 <p>Высококачественный медицинский инструментарий разработан в сотрудничестве с ведущими специалистами в травматологии и нейрохирургии.</p>
 
@@ -286,7 +290,7 @@
           </div>
         </section>
 
-        <section class="py-24 bg-body-light/5">
+        <section id="staff" class="hidden py-24 bg-body-light/5">
           <div class="container space-y-10">
             <div class="space-y-5 max-w-prose mx-auto1 text-center1">
               <h1 class="text-5xl font-extrabold text-body">Сотрудники</h1>
@@ -352,7 +356,7 @@
           </div>
         </section>
 
-        <section class="container my-24 space-y-10">
+        <section id="certificates" class="hidden container py-24 space-y-10">
           <div class="space-y-5 max-w-prose mx-auto text-center">
             <h1 class="text-5xl font-extrabold text-body">Сертификаты</h1>
 
@@ -402,7 +406,7 @@
           </div>
         </section>
 
-        <section class="container my-24 space-y-10">
+        <section id="contacts" class="hidden container mt-12 mb-24 space-y-10">
           <div class="space-y-5 max-w-prose mx-auto text-center">
             <h1 class="text-5xl font-extrabold text-body">Контакты</h1>
           </div>
@@ -460,11 +464,11 @@
 
           <div class="flex text-sm flex-col flex-wrap items-center justify-between py-6 mt-6 md:flex-row border-t border-body-light/20">
             <nav class="flex -mx-2 justify-center flex-wrap items-center border-b border-gray-200 md:border-b-0 md:py-0">
-              <a href="#" class="px-2 text-body underline hover:text-body hover:underline transition">О компании</a>
-              <a href="#" class="px-2 hover:text-body hover:underline transition">Продукция</a>
-              <a href="#" class="px-2 hover:text-body hover:underline transition">Сотрудники</a>
-              <a href="#" class="px-2 hover:text-body hover:underline transition">Сертификаты</a>
-              <a href="#" class="px-2 hover:text-body hover:underline transition">Контакты</a>
+              <a href="#who-we-are" class="px-2 text-body underline hover:text-body hover:underline transition">О компании</a>
+              <a href="#production" class="px-2 hover:text-body hover:underline transition">Продукция</a>
+              <a href="#staff" class="px-2 hover:text-body hover:underline transition">Сотрудники</a>
+              <a href="#certificates" class="px-2 hover:text-body hover:underline transition">Сертификаты</a>
+              <a href="#contacts" class="px-2 hover:text-body hover:underline transition">Контакты</a>
             </nav>
 
             <p>&copy;&nbsp;Copyright&nbsp;2022</p>

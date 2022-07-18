@@ -19,12 +19,48 @@ html {
   @apply font-mont text-body-light antialiased;
 }
 
+body.menuOpen {
+  @apply overflow-hidden;
+}
+
+.scroll-margin {
+  scroll-margin-top: 85px;
+}
+
 #container {
   @apply flex min-h-screen flex-col;
 }
 
+#header {
+  @apply md-down:fixed md-down:top-0 md-down:left-0 md-down:z-50 md-down:w-full md-down:bg-white/80 md-down:drop-shadow-lg;
+}
+
+.header__nav {
+  @apply pt-1 text-sm transition duration-[0s] md:py-0 md-down:fixed md-down:top-0 md-down:left-0 md-down:flex md-down:h-screen md-down:w-screen md-down:-translate-x-full md-down:items-center md-down:justify-center md-down:overflow-auto md-down:bg-body/90 md-down:text-white md-down:opacity-0 md-down:duration-500;
+}
+
+.header__ul {
+  @apply flex flex-wrap items-center justify-center md-down:w-full md-down:flex-col;
+}
+
+.header__ul a {
+  @apply inline-block p-2 transition hover:text-body hover:underline md-down:text-white/60 md-down:hover:text-white;
+}
+
+.header__ul a.is_active {
+  @apply text-body underline md-down:text-white;
+}
+
 #main {
-  @apply flex-grow;
+  @apply flex-grow md-down:pt-12 md-down:text-sm;
+}
+
+.products-list > div {
+  @apply flex items-center md-down:flex-col md-down:gap-6 md-down:text-center;
+}
+
+.products-list > div:nth-child(2n) {
+  @apply flex-row-reverse md-down:flex-col;
 }
 
 #footer {
