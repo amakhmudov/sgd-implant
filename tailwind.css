@@ -10,6 +10,10 @@
   display: none !important;
 }
 
+:root {
+  --headerHeight: 85px;
+}
+
 html,
 body {
   @apply min-h-full scroll-smooth;
@@ -24,7 +28,7 @@ body.menuOpen {
 }
 
 .scroll-margin {
-  scroll-margin-top: 85px;
+  scroll-margin-top: var(--headerHeight);
 }
 
 #container {
@@ -32,7 +36,7 @@ body.menuOpen {
 }
 
 #header {
-  @apply md-down:fixed md-down:top-0 md-down:left-0 md-down:z-50 md-down:w-full md-down:bg-white/80 md-down:drop-shadow-lg;
+  @apply fixed top-0 left-0 z-50 w-full bg-white/80 drop-shadow-lg;
 }
 
 .header__nav {

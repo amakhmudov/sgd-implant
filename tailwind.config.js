@@ -38,6 +38,13 @@ module.exports = {
         grass: "#1EB53A",
         flame: "#f00",
       },
+      aspectRatio: {
+        "cert-portrait": "756 / 1080",
+        "cert-landscape": "1920 / 1330",
+      },
+      boxShadow: {
+        icon: "0 -1px 0 rgb(102 102 102 / 0.2)",
+      },
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],
