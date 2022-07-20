@@ -27,13 +27,13 @@ module.exports = {
       fontSize: {},
       colors: {
         brand: {
-          DEFAULT: "#2bc1c5",
+          DEFAULT: "#20166c",
           dark: "#223e3f",
         },
         body: {
           DEFAULT: "#000",
           dark: "#000000",
-          light: "#666",
+          light: "#3e3e3e",
         },
         grass: "#1EB53A",
         flame: "#f00",

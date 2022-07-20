@@ -52,11 +52,35 @@ body.menuOpen {
 }
 
 .header__ul a.is_active {
-  @apply text-body underline md-down:text-white;
+  @apply font-medium text-brand underline md-down:text-white;
 }
 
 #main {
-  @apply flex-grow md-down:pt-12 md-down:text-sm;
+  padding-top: var(--headerHeight);
+
+  @apply flex-grow md-down:text-sm;
+}
+
+/* swiper carousel starts */
+.swiper-container,
+.swiper-slide {
+  @apply !h-auto;
+}
+
+.swiper-pagination {
+  @apply relative !top-auto !bottom-auto !mt-12 flex items-center justify-center space-x-2;
+}
+
+.swiper-pagination-bullet {
+  @apply h-2 w-2 rounded-full !bg-body/50 transition;
+}
+
+.swiper-pagination-bullet:first-child {
+  @apply !mx-0;
+}
+
+.swiper-pagination-bullet-active {
+  @apply h-3 w-3 rounded-full !bg-brand;
 }
 
 .products-list > div {
@@ -69,6 +93,18 @@ body.menuOpen {
 
 #footer {
   @apply flex-shrink-0;
+}
+
+.footer__ul {
+  @apply flex flex-wrap items-center md:justify-center;
+}
+
+.footer__ul a {
+  @apply inline-block p-2 transition hover:text-body hover:underline;
+}
+
+.footer__ul a.is_active {
+  @apply text-brand underline;
 }
 
 @layer components {
