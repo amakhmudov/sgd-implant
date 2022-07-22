@@ -612,10 +612,6 @@ video {
   position: relative;
 }
 
-.top-0 {
-  top: 0px;
-}
-
 .top-7 {
   top: 1.75rem;
 }
@@ -696,14 +692,6 @@ video {
 
 .h-12 {
   height: 3rem;
-}
-
-.h-5 {
-  height: 1.25rem;
-}
-
-.h-8 {
-  height: 2rem;
 }
 
 .w-6 {
@@ -893,22 +881,6 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-brand\/40 {
-  background-color: rgb(32 22 108 / 0.4);
-}
-
-.bg-white\/40 {
-  background-color: rgb(255 255 255 / 0.4);
-}
-
-.bg-body\/40 {
-  background-color: rgb(0 0 0 / 0.4);
-}
-
-.bg-body-light\/40 {
-  background-color: rgb(62 62 62 / 0.4);
-}
-
 .bg-body\/20 {
   background-color: rgb(0 0 0 / 0.2);
 }
@@ -926,9 +898,9 @@ video {
   padding: 0px;
 }
 
-.py-6 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .px-6 {
@@ -946,14 +918,14 @@ video {
   padding-bottom: 3rem;
 }
 
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 .pb-16 {
@@ -1080,7 +1052,7 @@ video {
 }
 
 :root {
-  --headerHeight: 85px;
+  --headerHeight: 68px;
 }
 
 html, 
@@ -1358,11 +1330,6 @@ body.menuOpen {
   --tw-shadow: var(--tw-shadow-colored);
 }
 
-.group:hover .group-hover\:border-brand {
-  --tw-border-opacity: 1;
-  border-color: rgb(32 22 108 / var(--tw-border-opacity));
-}
-
 .group:hover .group-hover\:opacity-100 {
   opacity: 1;
 }
@@ -1421,6 +1388,11 @@ body.menuOpen {
     padding: 6rem;
   }
 
+  .md\:py-6 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
   .md\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -1434,11 +1406,6 @@ body.menuOpen {
   .md\:px-12 {
     padding-left: 3rem;
     padding-right: 3rem;
-  }
-
-  .md\:py-6 {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
   }
 
   .md\:text-5xl {
